@@ -1,0 +1,17 @@
+name: jfrog
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Frogbot by JFrog
+        uses: jfrog/frogbot@v2.21.9
+          
