@@ -4,7 +4,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
 
       - name: Setup DotNet
         uses: actions/setup-dotnet@v4
@@ -15,6 +15,7 @@ jobs:
         shell: bash
         run: |
           dotnet build --configuration Release
+          ls -al
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/dotnet@master
@@ -22,7 +23,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=snyk.sarif
+          args: --sarif-file-output=snyk.sarif --file=SystemDrawingCommon.sln
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
