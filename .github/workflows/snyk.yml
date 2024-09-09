@@ -3,6 +3,10 @@ on: push
 jobs:
   security:
     runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+
     steps:
       # https://github.com/GitHubSecurityLab/actions-permissions/tree/main/monitor
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
